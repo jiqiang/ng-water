@@ -18,7 +18,7 @@
         <p>Search Query: {{searchFish}}</p>
       </div>
       -->
-      
+
       <form ng-submit="updateTable()">
         <div class="form-group">
           <div class="input-group">
@@ -33,7 +33,7 @@
         </div>
         <input type="submit" class="btn btn-default" value="Apply" />
       </form>
-      
+
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -61,7 +61,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse">
+          <tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse | filter:filterByTastiness">
             <td>{{roll.name}}</td>
             <td>{{roll.fish}}</td>
             <td>{{roll.tastiness}}</td>
