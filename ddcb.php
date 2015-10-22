@@ -7,9 +7,10 @@
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
       <script src="http://underscorejs.org/underscore-min.js"></script>
       <style>
-        
+
       </style>
   </head>
   <body>
@@ -29,15 +30,33 @@
 
     <div ng-controller="MainController">
         <span ng-show="showTableau"><a href="#tableau" ng-click="showTableau = !showTableau">tableau</a> version</span>
-        <span ng-show="!showTableau"><a href="#plain-text" ng-click="showTableau = !showTableau">plain text</a> version</span>
-        <div>{{test}}</p>
+        <span ng-show="!showTableau"><a href="#plain" ng-click="showTableau = !showTableau">plain text</a> version</span>
+        <div ng-view></div>
     </div>
 
-    <script>
-    var waterApp = angular.module('waterApp', []);
 
-    waterApp.controller('MainController', function ($scope) {
+
+    <script>
+    angular.module('waterApp', ['ngRoute'])
+    .config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
+        $routeProvider
+        .when('/tableau', {
+            templateUrl: 'templates/tableau.tpl.html',
+            controller: 'TableauController'
+        })
+        .when('/plain', {
+            templateUrl: 'templates/plain.tpl.html',
+            controller: 'PlainController'
+        });
+    }])
+    .controller('MainController', ['$route', '$routeParams', '$location', function($scope) {
         $scope.showTableau = true;
+    }])
+    .controller('TableauController', function($scope) {
+        $scope.view = 'tableau';
+    })
+    .controller('PlainController', function($scope) {
+        $scope.view = 'plain';
     });
 
 
