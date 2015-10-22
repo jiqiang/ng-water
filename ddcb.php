@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="e">
+<html ng-app="waterApp">
   <head>
       <meta charset="utf-8">
       <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
@@ -26,8 +26,24 @@
         </li>
       </ul>
     </div>
-    <div>asfasfsafsadf</div>
+
+    <div ng-controller="MainController">
+        <span ng-show="showTableau"><a href="#tableau" ng-click="showTableau = !showTableau">tableau</a> version</span>
+        <span ng-show="!showTableau"><a href="#plain-text" ng-click="showTableau = !showTableau">plain text</a> version</span>
+        <div>{{test}}</p>
+    </div>
+
     <script>
+    var waterApp = angular.module('waterApp', []);
+
+    waterApp.controller('MainController', function ($scope) {
+        $scope.showTableau = true;
+    });
+
+
+
+
+
     (function (window, document) {
     'use strict';
 
