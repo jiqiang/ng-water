@@ -1,42 +1,44 @@
 <?php
 require_once 'medoo.php';
 
-$database = new medoo(array(
-  'database_type' => 'pgsql',
-  'database_name' => 'dellstore2',
-  'server' => 'localhost',
-  'username' => 'postgres',
-  'password' => 'Jiqiang@1977',
-  'charset' => 'utf8',
-  'port' => 5432
-));
+$database = new medoo(
+    array(
+        'database_type' => 'pgsql',
+        'database_name' => 'dellstore2',
+        'server' => 'localhost',
+        'username' => 'postgres',
+        'password' => 'Jiqiang@1977',
+        'charset' => 'utf8',
+        'port' => 5432
+    )
+);
 
 echo '<pre>';
 print_r($database->info());
 
 
 $data1 = $database->select(
-  // Table name.
-  'cust_hist', 
-  // Joins.
-  array(
-    '[><]customers' => 'customerid',
-    '[><]products' => 'prod_id',
-    '[><]orders' => 'orderid',
-  ),
-  // Columns. 
-  array(
-    'customers.firstname',
-    'customers.lastname',
-    'products.title',
-    'orders.orderdate',
-    'orders.totalamount',
-  ),
-  // Where conditions. 
-  array(
-    'ORDER' => 'orders.orderdate ASC',
-    'LIMIT' => 100,
-  )
+    // Table name.
+    'cust_hist',
+    // Joins.
+    array(
+        '[><]customers' => 'customerid',
+        '[><]products' => 'prod_id',
+        '[><]orders' => 'orderid',
+    ),
+    // Columns.
+    array(
+        'customers.firstname',
+        'customers.lastname',
+        'products.title',
+        'orders.orderdate',
+        'orders.totalamount',
+    ),
+    // Where conditions.
+    array(
+        'ORDER' => 'orders.orderdate ASC',
+        'LIMIT' => 100,
+    )
 );
 
 print_r($data1);
