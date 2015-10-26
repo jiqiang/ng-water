@@ -1,7 +1,5 @@
 <?php
 
-namespace DellStore;
-
 /**
  * Dell store class.
  */
