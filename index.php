@@ -10,6 +10,7 @@
       <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
       <script src="http://underscorejs.org/underscore-min.js"></script>
       <style>
         .dropdown-menu div.checkbox {
