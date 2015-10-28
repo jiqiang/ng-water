@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="waterApp">
+  <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+      <style>
+      </style>
+  </head>
+  <body>
+
+
+    <div ng-controller="MainController">
+        <wid-dropdown cbs="checkboxes"></wid-dropdown>
+    </div>
+
+
+
+    <script>
+    angular.module('waterApp', [])
+    .controller('MainController', ['$scope', function($scope) {
+        $scope.checkboxes = [
+            'glen',
+            'joy',
+            'yollande',
+            'austyn'
+        ];
+    }])
+    .directive('widDropdown', function() {
+        return {
+            restrict: 'EA',
+            transclude: false,
+            templateUrl: 'directive-templates/wid-dropdown.html',
+            scope: {
+                cbs: '='
+            }
+
+        };
+    });
+    </script>
+  </body>
+</html>
