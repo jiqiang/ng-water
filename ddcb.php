@@ -47,12 +47,13 @@
 
     var myService = angular.module('myService', []);
     myService.factory('myService', ['$http', function ($http) {
-        var service = {
-            getData: function () {
-                return $http({method: 'GET', url: 'server.php'});
-            }
+        var getData = function () {
+            return $http({method: 'GET', url: 'server.php'});
         };
-        return service;
+
+        return {
+            getData: getData
+        };
     }]);
 
     var mainController = angular.module('mainController', []);
@@ -64,38 +65,26 @@
         'myService',
         function($scope, $route, $routeParams, $location, myService) {
             console.log('main controller');
-            myService.getData().then(function (response) {
-                $scope.$broadcast('dataIsReady', response.data);
-            });
 
-            $scope.switchView = function () {
+            $scope.$on('$viewContentLoaded', function (event) {
+                console.log('view content loaded');
                 myService.getData().then(function (response) {
-                    $scope.$broadcast('dataIsReady', response.data);
+                    $scope.name = response.data.name;
+                    $scope.age = response.data.age;
+                    $scope.timestamp = response.data.timestamp;
                 });
-            }
+            });
         }
     ]);
 
     var tableauController = angular.module('tableauController', []);
     tableauController = waterApp.controller('tableauController', ['$scope', function($scope) {
         console.log('tableau controller');
-        $scope.$on('dataIsReady', function (event, data) {
-            $scope.name = data.name;
-            $scope.age = data.age;
-        });
-        $scope.name = 'Joy';
-        $scope.age = 35;
     }]);
 
     var plainController = angular.module('plainController', []);
     plainController = waterApp.controller('plainController', ['$scope', function($scope) {
         console.log('plain controller');
-        $scope.$on('dataIsReady', function (event, data) {
-            $scope.name = data.name;
-            $scope.age = data.age;
-        });
-        $scope.name = 'Joy';
-        $scope.age = 35;
     }]);
 
 </script>
