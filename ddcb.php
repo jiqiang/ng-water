@@ -26,6 +26,7 @@
     var waterApp = angular.module('waterApp', [
         'ngRoute',
         'myService',
+        'myService2',
         'mainController',
         'tableauController',
         'plainController'
@@ -47,6 +48,7 @@
 
     var myService = angular.module('myService', []);
     myService.factory('myService', ['$http', function ($http) {
+
         var getData = function () {
             return $http({method: 'GET', url: 'server.php'});
         };
@@ -56,24 +58,47 @@
         };
     }]);
 
-    var mainController = angular.module('mainController', []);
+    var myService2 = angular.module('myService2', []);
+    myService2.factory('myService2', function ($http) {
+        var environment;
+
+        var getEnv = function () {
+            return environment;
+        };
+
+        var setEnv = function (value) {
+            environment = value;
+        }
+
+        return {
+            getEnv: getEnv,
+            setEnv: setEnv
+        };
+    });
+
+    var mainController = angular.module('mainController', ['myService2']);
     mainController.controller('mainController', [
         '$scope',
         '$route',
         '$routeParams',
         '$location',
         'myService',
-        function($scope, $route, $routeParams, $location, myService) {
+        'myService2',
+        function($scope, $route, $routeParams, $location, myService, myService2) {
             console.log('main controller');
 
             $scope.$on('$viewContentLoaded', function (event) {
                 console.log('view content loaded');
+
                 myService.getData().then(function (response) {
                     $scope.name = response.data.name;
                     $scope.age = response.data.age;
                     $scope.timestamp = response.data.timestamp;
                 });
+
             });
+
+            myService2.setEnv('dev');
         }
     ]);
 
@@ -82,9 +107,10 @@
         console.log('tableau controller');
     }]);
 
-    var plainController = angular.module('plainController', []);
-    plainController = waterApp.controller('plainController', ['$scope', function($scope) {
+    var plainController = angular.module('plainController', ['myService2']);
+    plainController = waterApp.controller('plainController', ['$scope', 'myService2', function($scope, myService2) {
         console.log('plain controller');
+        console.log(myService2.getEnv());
     }]);
 
 </script>
