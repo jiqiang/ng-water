@@ -3,7 +3,7 @@
 
 'use strict';
 
-$('.manual-toggle').click(function(e) {
+$('.manual-toggle').click(function (e) {
     e.stopPropagation();
 });
 
@@ -38,7 +38,7 @@ var mainController = function ($scope, $location, $http) {
         {code: 8, isChecked: true}
     ];
     $scope.toggleCheckAll = function () {
-        $scope.tastiLevels.map(function(value, index) {
+        $scope.tastiLevels.map(function (value, index) {
             $scope.tastiLevels[index].isChecked = $scope.globalCheckAll.isChecked;
         });
     };
@@ -52,7 +52,7 @@ var mainController = function ($scope, $location, $http) {
         {code: 'Rainbow', isChecked: true}
     ];
     $scope.toggleCheckAllSushiRolls = function () {
-        $scope.sushiRolls.map(function(value, index) {
+        $scope.sushiRolls.map(function (value, index) {
             $scope.sushiRolls[index].isChecked = $scope.globalCheckAllSushiRolls.isChecked;
         });
     };
@@ -79,10 +79,10 @@ var mainController = function ($scope, $location, $http) {
     };
 
     $scope.sushi = [
-        { name: 'Cali Roll', fish: 'Crab', tastiness: 2, show: true },
-        { name: 'Philly', fish: 'Tuna', tastiness: 4, show: true },
-        { name: 'Tiger', fish: 'Eel', tastiness: 7, show: true },
-        { name: 'Rainbow', fish: 'Variety', tastiness: 6, show: true }
+        {name: 'Cali Roll', fish: 'Crab', tastiness: 2, show: true},
+        {name: 'Philly', fish: 'Tuna', tastiness: 4, show: true},
+        {name: 'Tiger', fish: 'Eel', tastiness: 7, show: true},
+        {name: 'Rainbow', fish: 'Variety', tastiness: 6, show: true}
     ];
 };
 
