@@ -1,5 +1,5 @@
-/*global $, angular, _, console*/
 (function () {
+
     'use strict';
 
     $('.manual-toggle').click(function (e) {
@@ -7,7 +7,6 @@
     });
 
     var mainController = function ($scope, $http) {
-
 
         $http({
             method: 'GET',
