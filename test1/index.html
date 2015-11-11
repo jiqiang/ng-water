@@ -11,16 +11,9 @@
   </head>
   <body ng-controller="mainController">
 
-    <select multiple="multiple" wid-dropdown-checkbox>
-        <option value="red">Red</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="orange">Orange</option>
-        <option value="purple">Purple</option>
-        <option value="yellow">Yellow</option>
-        <option value="brown">Brown</option>
-        <option value="black">Black</option>
-    </select>
+    <select multiple wid-dropdown-checkbox="{label: 'Drainage Division'}" dc-options="dcoptions"></select>
+
+    <select multiple wid-dropdown-checkbox="{label: 'Drainage Division'}" dc-options="dcoptions2"></select>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
