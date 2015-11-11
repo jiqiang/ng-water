@@ -29,6 +29,10 @@
             'yollande',
             'austyn'
         ];
+
+        $scope.$on('onclickcheckbox', function () {
+          console.log('do something');
+        });
     }])
     .directive('widDropdown', function() {
         return {
@@ -37,8 +41,12 @@
             templateUrl: 'directive-templates/wid-dropdown.html',
             scope: {
                 cbs: '='
+            },
+            controller: function ($scope) {
+              $scope.onclick = function (item) {
+                $scope.$emit('onclickcheckbox');
+              }
             }
-
         };
     });
     </script>

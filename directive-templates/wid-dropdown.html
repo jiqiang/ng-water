@@ -4,7 +4,7 @@
             <a href="" id="menuLink1" class="pure-menu-link">Contact</a>
             <ul class="pure-menu-children">
                 <li class="pure-menu-item" ng-repeat="c in cbs track by $index">
-                    <label class="pure-menu-link"><input type="checkbox" />{{c}}</label>
+                    <label class="pure-menu-link"><input type="checkbox" ng-click="onclick(c)" />{{c}}</label>
                 </li>
             </ul>
         </li>
