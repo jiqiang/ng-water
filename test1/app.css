@@ -1,5 +1,5 @@
-body {
-    font-size: 12px;
-}
-
-[wid-dropdown-checkbox]{ display: none; }
+[wid-ddcb]{ display: none; }
+.ui-multiselect,
+.ui-multiselect-menu,
+.dataTables_wrapper { font-size: 11px; }
+.ui-multiselect-close { display: none;}
