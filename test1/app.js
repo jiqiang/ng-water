@@ -1,7 +1,7 @@
 angular.module('myApp', [])
 
-.controller('mainController', ['$scope', function($scope) {
-    $scope.dcoptions = ['abc', 'bcd', 'cde', 'def', 'abc2', 'bcd2', 'cde2', 'def2'];
+.controller('mainController', ['$scope', '$document', function($scope, $document) {
+    $scope.dcoptions = ["Tiger Nixon", "Garrett Winters", "Ashton Cox", "Cedric Kelly", "Airi Satou"];
     $scope.dcoptions2 = ['abc2', 'bcd2', 'cde2', 'def2'];
     $scope.data = [
         [ "Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", "$320,800" ],
@@ -11,8 +11,22 @@ angular.module('myApp', [])
         [ "Airi Satou", "Accountant", "Tokyo", "5407", "2008/11/28", "$162,700" ]
     ];
     $scope.$on('doUpdateTable', function () {
-        $scope.data.splice(0,1);
-        $scope.$broadcast('doUpdateData', {data: $scope.data});
+
+
+        var checkboxes = $document.find("div.firstglen ul.ui-multiselect-checkboxes input[type='checkbox']"),
+        names = [],
+        regx = "";
+        angular.forEach(checkboxes, function (el, key) {
+            if (el.checked) {
+                names.push(el.value);
+            }
+        });
+
+        regx = "^" + names.join("|") + "$";
+
+        $scope.$broadcast('doUpdateData', {
+            regx: regx
+        });
     });
 
 
@@ -64,7 +78,7 @@ angular.module('myApp', [])
         link: function (scope, element, attrs) {
 
             var table = element.DataTable({
-                searching: false,
+                searching: true,
                 data: scope.$parent.data,
                 columns: [
                     { title: "Name" },
@@ -77,7 +91,8 @@ angular.module('myApp', [])
             });
 
             scope.$on('doUpdateData', function (event, value) {
-                table.clear().rows.add(value.data).draw();
+
+                table.column(0).search(value.regx, true, false).draw();
             });
         }
     };
